@@ -1,65 +1,26 @@
 <?php
-    class SocialcollecCommand extends CConsoleCommand
+    class SocialcollectCommand extends CConsoleCommand
     {
-        public function run($social_name) {
-            print_r($this->getTwitterJSON_V1_1());
-        }
+        public function run($attributes) {
+            $social_type=SocialTypes::model()->findByAttributes(array('name' => $attributes[0]));
 
-        function getTwitterJSON_V1_1() {
-        
-            $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+            if(isset($social_type->id)) {
+                $social = SocialProviderFactory::create($attributes[0]);              
+                
+                $posts = $social->getSocialData();
 
-            //TODO: add config params for this values
-            $oauth_access_token = "290383226-ZVlY9YlCL9BuJkSeu04UWYRAiRIp7FkiSuUFohti";
-            $oauth_access_token_secret = "vF2sHqYymOuH9oKZ0Cbo2NPeNYkPGphMwZuoinxIO5HfT";
-            $consumer_key = "kDsyji5aII5mkvrTbN3gcA";
-            $consumer_secret = "yJL1fp75PPcbLFJhRP3Q70WXTL7NIzzWkg419E6ceb0";
-
-            $oauth = array('oauth_consumer_key' => $consumer_key,
-                'oauth_nonce' => time(),
-                'oauth_signature_method' => 'HMAC-SHA1',
-                'oauth_token' => $oauth_access_token,
-                'oauth_timestamp' => time(),
-                'oauth_version' => '1.0');
-
-            $base_info = $this->buildBaseString($url, 'GET', $oauth);
-            $composite_key = rawurlencode($consumer_secret) . '&' . rawurlencode($oauth_access_token_secret);
-            $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
-            $oauth['oauth_signature'] = $oauth_signature;
-
-            // Make Requests
-            $header = array($this->buildAuthorizationHeader($oauth), 'Expect:');
-            $options = array(CURLOPT_HTTPHEADER => $header,
-                //CURLOPT_POSTFIELDS => $postfields,
-                CURLOPT_HEADER => false,
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_SSL_VERIFYPEER => false);
-
-            $feed = curl_init();
-            curl_setopt_array($feed, $options);
-            $json = curl_exec($feed);
-            curl_close($feed);
-            
-            return $twitter_data = json_decode($json);
-        }
-
-        function buildBaseString($baseURI, $method, $params) {
-            $r = array();
-            ksort($params);
-            foreach ($params as $key => $value) {
-                $r[] = "$key=" . rawurlencode($value);
+                foreach ($posts as $key => $value) {
+                    $is_data = SocialData::model()->findByAttributes(array('data_id' => $value['data_id']));
+                    if(empty($is_data)) {
+                        $Post = new SocialData;
+                        $Post->social_type_id = $social_type->id;
+                        $Post->data_id = $value['data_id'];
+                        $Post->data = $value['data'];
+                        if($Post->validate())
+                            $Post->save();
+                    }                    
+                }    
             }
-            return $method . "&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $r));
-        }
-
-        function buildAuthorizationHeader($oauth) {
-            $r = 'Authorization: OAuth ';
-            $values = array();
-            foreach ($oauth as $key => $value)
-                $values[] = "$key=\"" . rawurlencode($value) . "\"";
-            $r .= implode(', ', $values);
-            return $r;
-        }
+        }        
     }
 ?>
