@@ -15,39 +15,39 @@ Configure
 
 Change your config console:
 
-'modules'=>array(
-    'socialcollect' => array(
-        'providers' => array(
-            'facebook' => array(
-                'appId' => 'YOUR_APPID',
-                'secret' => 'YOUR_APP_SECRET',
-                'fbaccesstoken' => 'YOUR FACEBOOK APP TOKEN',
-                'fbLimit' => 'LIMIT OF FACEBOOK POSTS FOR ONE REQUEST',
-            ),
-            'twitter' => array(
-                'oauth_access_token' => 'YOUR_TWITTER_APPID',
-                'consumer_key' => 'YOUR_TWITTER_APPID_CONSUMER_KEY',
-                'consumer_secret' => 'YOUR_TWITTER_APPID_CONSUMER_SECRET',
-                'oauth_access_token_secret' => 'YOUR_TWITTER_APPID_ACCESS_TOKEN',                
-            ),          
-            'instagram' => array(
-                'apiKey'      => 'YOUR_INSTAGRAM_API_APIKEY',
-                'apiSecret'   => 'YOUR_INSTAGRAM_API_APISECRET',
-                'apiCallback' => 'YOUR_INSTAGRAM_API_APICALLBACK',
-                'userId' => 'YOUR_INSTAGRAM_USER_FOR_COLLECT_THIS_USER_FEED',
-                'accessToken' => 'YOUR_INSTAGRAM_ACCESSTOKEN'
-            ),
-            'vimeo' => array(
-                'userId'      => 'YOUR_VIMEO_USER_FOR_COLLECT_THIS_USER_VIDEOS_FEED',                        
+    'modules'=>array(
+        'socialcollect' => array(
+            'providers' => array(
+                'facebook' => array(
+                    'appId' => 'YOUR_APPID',
+                    'secret' => 'YOUR_APP_SECRET',
+                    'fbaccesstoken' => 'YOUR FACEBOOK APP TOKEN',
+                    'fbLimit' => 'LIMIT OF FACEBOOK POSTS FOR ONE REQUEST',
+                ),
+                'twitter' => array(
+                    'oauth_access_token' => 'YOUR_TWITTER_APPID',
+                    'consumer_key' => 'YOUR_TWITTER_APPID_CONSUMER_KEY',
+                    'consumer_secret' => 'YOUR_TWITTER_APPID_CONSUMER_SECRET',
+                    'oauth_access_token_secret' => 'YOUR_TWITTER_APPID_ACCESS_TOKEN',                
+                ),          
+                'instagram' => array(
+                    'apiKey'      => 'YOUR_INSTAGRAM_API_APIKEY',
+                    'apiSecret'   => 'YOUR_INSTAGRAM_API_APISECRET',
+                    'apiCallback' => 'YOUR_INSTAGRAM_API_APICALLBACK',
+                    'userId' => 'YOUR_INSTAGRAM_USER_FOR_COLLECT_THIS_USER_FEED',
+                    'accessToken' => 'YOUR_INSTAGRAM_ACCESSTOKEN'
+                ),
+                'vimeo' => array(
+                    'userId'      => 'YOUR_VIMEO_USER_FOR_COLLECT_THIS_USER_VIDEOS_FEED',                        
+                )
             )
-        )
-    ),
-'commandMap' => array(
-    'socialcollect' => array(
-        'class' => 'application.modules.socialcollect.commands.SocialcollectCommand',
-    ),
+        ),
+    'commandMap' => array(
+        'socialcollect' => array(
+            'class' => 'application.modules.socialcollect.commands.SocialcollectCommand',
+        ),
 
-),            
+    ),            
 
 Install
 -------
