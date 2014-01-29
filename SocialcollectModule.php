@@ -2,6 +2,9 @@
 
 class SocialcollectModule extends CWebModule
 {
+
+	public $providers=array();
+
 	public function init()
 	{
 		

@@ -1,6 +1,7 @@
 <?php
 /*
-    Facebook social provider
+    #Facebook social provider
+    @author Konstantin Popov <popovconstantine@gmail.com>
  */
 class ProviderSocialFacebook extends ProviderSocial {    
     var $appId;    
