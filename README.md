@@ -6,7 +6,7 @@ This Yii Frameworks module for collects social data from most popular socials ne
 Git clone
 ---------
     
-    Clone this repository in your protected/modules/socialcollect folder
+Clone this repository in your protected/modules/socialcollect folder
 
     git clone https://github.com/tamvodopad/YiiSocialDataCollect.git
 

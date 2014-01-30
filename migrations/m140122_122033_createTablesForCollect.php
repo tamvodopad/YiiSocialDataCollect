@@ -18,8 +18,6 @@ class m140122_122033_createTablesForCollect extends EDbMigration
             'name' => 'string NOT NULL COMMENT "name of social"',            
         ));
 
-        //$this->createIndex('social_data_social_type', 'social_data', 'social_type_id', true);
-
         $this->addForeignKey('social_type_id', 'social_data', 'social_type_id', 'social_types', 'id', 'CASCADE', 'RESTRICT');
 
         $this->insert('social_types', array(
@@ -42,21 +40,6 @@ class m140122_122033_createTablesForCollect extends EDbMigration
 	public function safeDown()
 	{
 		$this->dropTable('social_data');
-		$this->dropTable('social_types');
-				
-
-		//echo "m140122_122033_createTablesForCollect does not support migration down.\n";
-		//return false;
-	}
-
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
+		$this->dropTable('social_types');			
+	}	
 }
