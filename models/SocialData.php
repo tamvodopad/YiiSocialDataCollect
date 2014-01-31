@@ -49,7 +49,8 @@ class SocialData extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'socialTypes' => array(self::HAS_ONE, 'SocialTypes', 'id'),
+			
+			'socialTypes' => array(self::BELONGS_TO, 'SocialTypes', 'social_type_id'),
 		);
 	}
 

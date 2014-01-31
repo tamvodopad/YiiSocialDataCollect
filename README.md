@@ -64,7 +64,7 @@ Install
 Using the application
 -------
 
-You can grub data from social networks to yii database by commands: 
+1. You can grub data from social networks to yii database by commands: 
 
 * yiic socialcollect Facebook - add data from facebook page
 * yiic socialcollect Twitter - add data from twitter accaunt
@@ -72,3 +72,5 @@ You can grub data from social networks to yii database by commands:
 * yiic socialcollect Vimeo - add data from vimeo accaunt
 
 To automate, you can add these commands to your cron task.
+
+2. For administration all social data you can use controller: /social collect/social Data/admin in this module.
